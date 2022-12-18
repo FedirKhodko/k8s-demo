@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sum-app
+  labels:
+    app: sum-app
+spec:
+  containers:
+    - name: sum-app-container
+      image: fredor89/sum-app:latest
+      ports:
+        - containerPort: 8080

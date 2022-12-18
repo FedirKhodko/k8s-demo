@@ -1,0 +1,48 @@
+#-------------------------------------------------------------
+# Manifest File to create deployment of Java Spring Boot app
+#
+# Copyleft (c) by Khodko Fedor
+#-------------------------------------------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sum-app-deployment
+  labels:
+    app: sum-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sum-app
+  template:
+    metadata:
+      labels:
+        app: sum-app
+    spec:
+      containers:
+        - name: sum-app
+          image: fredor89/sum-app:latest
+          ports:
+            - containerPort: 8080
+
+#---
+#apiVersion: autoscaling/v2beta1
+#kind: HorizontalPodAutoscaler
+#metadata:
+#  name: sum-app-autoscaling
+#spec:
+#  scaleTargetRef:
+#    apiVersion: apps/v2beta1v1
+#    kind: Deployment
+#    name: sum-app-deployment
+#  minReplicas: 2
+#  maxReplicas: 6
+#  metrics:
+#    - type: Resource
+#      resource:
+#        name: cpu
+#        targetAverageUtilization: 70
+#    - type: Resource
+#      resource:
+#        name: memory
+#        targetAverageUtilization: 80

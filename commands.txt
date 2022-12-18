@@ -1,0 +1,22 @@
+docker build -t sum-app .
+docker run --name sum-app -p 8080:8080 -d sum-app
+
+docker tag sum-app:latest fredor89/sum-app:latest
+docker push fredor89/sum-app:latest
+
+
+kubectl get pods
+kubectl apply -f pod-sum-app.yml
+kubectl delete -f pod-sum-app.yml
+kubectl port-forward sum-app 8080:8080
+kubectl describe pods sum-app
+kubectl logs sum-app
+kubectl exec -it sum-app sh
+
+kubectl get deploy
+kubectl describe deployments sum-app-deployment
+kubectl get rs
+kubectl rollout history deployment/sum-app-deployment
+kubectl rollout status deployment/sum-app-deployment
+kubectl apply -f deployment.yml
+kubectl get hpa
