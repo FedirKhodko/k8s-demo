@@ -1,9 +1,10 @@
 docker build -t sum-app .
-docker run --name sum-app -p 8080:8080 -d sum-app
+#docker run --name sum-app -p 8080:8080 -d sum-app
 
 docker tag sum-app:latest fredor89/sum-app:latest
+# login to DockerHub:
+docker login
 docker push fredor89/sum-app:latest
-
 
 kubectl get pods
 kubectl apply -f pod-sum-app.yml
@@ -19,4 +20,5 @@ kubectl get rs
 kubectl rollout history deployment/sum-app-deployment
 kubectl rollout status deployment/sum-app-deployment
 kubectl apply -f deployment.yml
+kubectl delete -f deployment.yml
 kubectl get hpa
